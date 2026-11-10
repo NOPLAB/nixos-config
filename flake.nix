@@ -22,6 +22,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "before-home-manager";
           home-manager.users.nop = import ./home.nix;
           home-manager.extraSpecialArgs = { inherit inputs; };
         }

@@ -8,9 +8,15 @@
     tree-sitter
     gcc
     curl
+    ripgrep
+    unzip
+    lua-language-server
+    stylua
 
     fnm
     pnpm
+
+    uv
 
     rustup
     cargo
