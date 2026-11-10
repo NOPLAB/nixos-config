@@ -2,6 +2,12 @@
 
 let
   agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  # The system's 26.05 package only supports macOS. Use the Linux package
+  # from the newer nixpkgs already pinned by llm-agents in flake.lock.
+  desktopPkgs = import inputs.llm-agents.inputs.nixpkgs {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
 in
 
 {
@@ -13,7 +19,7 @@ in
     pkgs.xeyes
     pkgs.discord
     pkgs.slack
-    pkgs.chatgpt
+    desktopPkgs.chatgpt
     (pkgs.callPackage ./pkgs/claude-desktop.nix { })
     (pkgs.callPackage ./pkgs/tern.nix { })
 
