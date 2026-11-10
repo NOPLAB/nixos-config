@@ -13,7 +13,6 @@
     rustup
     cargo
 
-    stm32cubemx
     probe-rs-tools
   ];
 }
