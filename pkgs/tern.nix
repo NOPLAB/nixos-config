@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://build.stencil.so/d/tern/20261110-001919-6071256/Tern-${version}-linux-x86_64.tar.gz";
-    hash = "sha256-BCiqLpp82q3qxoYW0GYEXutcNI1ebYD2bHFfGziJNZw=";
+    hash = "sha256-9PCoIb/GSWv42i1110+LaKJO2BeZ1gnNgDim9HQn8+Y=";
   };
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper copyDesktopItems ];
