@@ -1,6 +1,6 @@
 { lib
 , stdenv
-, fetchurl
+, requireFile
 , autoPatchelfHook
 , makeWrapper
 , makeDesktopItem
@@ -20,9 +20,15 @@ stdenv.mkDerivation rec {
   pname = "tern";
   version = "0.9.14";
 
-  src = fetchurl {
-    url = "https://build.stencil.so/d/tern/20261110-001919-6071256/Tern-${version}-linux-x86_64.tar.gz";
-    hash = "sha256-9PCoIb/GSWv42i1110+LaKJO2BeZ1gnNgDim9HQn8+Y=";
+  # Downloads require a Stencil login; an unauthenticated fetch returns HTML.
+  src = requireFile {
+    name = "Tern-${version}-linux-x86_64.tar.gz";
+    hash = "sha256-BCiqLpp82q3qxoYW0GYEXutcNI1ebYD2bHFfGziJNZw=";
+    message = ''
+      Download Tern ${version} while signed in to Stencil, then run:
+        nix-store --add-fixed sha256 ~/Downloads/Tern-${version}-linux-x86_64.tar.gz
+      Source: https://build.stencil.so/d/tern/20261110-001919-6071256/Tern-${version}-linux-x86_64.tar.gz
+    '';
   };
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper copyDesktopItems ];

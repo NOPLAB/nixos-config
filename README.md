@@ -34,5 +34,14 @@ colcon --help
 
 `pkgs/tern.nix` で公式Linuxバイナリをパッケージ化し、Home Managerで導入します。
 ターミナルでは `tern`、アプリ一覧では「Tern」から起動できます。
-Downloads内のファイルは参照せず、バージョン固定のURLとSHA-256で取得します。
-更新時は `version`、URL内のビルドID、`hash` を合わせて更新してください。
+配布ファイルの取得にはStencilへのログインが必要です。ブラウザで取得後、
+再構築前に一度だけNixストアへ登録してください。
+
+```bash
+nix-store --add-fixed sha256 ~/Downloads/Tern-0.9.14-linux-x86_64.tar.gz
+sudo nixos-rebuild switch --flake /etc/nixos#nixos
+```
+
+登録後のビルドはDownloadsを参照せず、固定したSHA-256で内容を検証します。
+ストアのGCで削除された場合は再登録してください。
+更新時は `pkgs/tern.nix` の `version`、案内URL、`hash` とこの登録コマンドを更新します。
