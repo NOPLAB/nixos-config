@@ -11,6 +11,8 @@ in
   home.packages = [
     pkgs.cowsay
     pkgs.xeyes
+    pkgs.discord
+    pkgs.slack
 
     agents.claude-code
     agents.codex
