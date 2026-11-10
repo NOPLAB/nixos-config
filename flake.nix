@@ -8,9 +8,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     llm-agents.url = "github:numtide/llm-agents.nix";
+    nix-ros-overlay.url = "github:lopsided98/nix-ros-overlay/master";
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs: {
+    devShells.x86_64-linux.ros2-humble =
+      inputs.nix-ros-overlay.devShells.x86_64-linux.example-ros2-desktop-humble;
+
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 

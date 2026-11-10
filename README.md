@@ -13,3 +13,19 @@ lazy.nvimのプラグインは初回起動時に取得します。更新可能�
 
 既存の設定ファイルはHome Managerへの移行時に `.before-home-manager` 付きで
 バックアップします。同名のバックアップが既にある場合は、先に移動してください。
+
+## ROS 2 Humble
+
+`nix-ros-overlay` のHumble desktop開発環境を使用します。
+システムとは別に、overlay側のnixpkgsでROSの依存関係を管理します。
+
+```bash
+nix develop /etc/nixos#ros2-humble
+echo "$ROS_DISTRO"
+ros2 --help
+colcon --help
+```
+
+開発シェルはBashです。終了するには `exit` を実行します。
+システムの再構築後はROS用のバイナリキャッシュも利用できます。
+キャッシュにないパッケージはソースからビルドされる場合があります。

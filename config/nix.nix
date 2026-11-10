@@ -5,6 +5,10 @@
 
   nix = {
     settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.extra-substituters = [ "https://ros.cachix.org" ];
+    settings.extra-trusted-public-keys = [
+      "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
+    ];
 
     gc = {
       automatic = true;
