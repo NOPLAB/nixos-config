@@ -1,4 +1,8 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
+
+let
+  agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 
 {
   home.username = "nop";
@@ -8,8 +12,8 @@
     pkgs.cowsay
     pkgs.xeyes
 
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+    agents.claude-code
+    agents.codex
   ];
 
   home.stateVersion = "26.05";

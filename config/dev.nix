@@ -1,21 +1,19 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = with pkgs; [
+    git
+    gh
+    neovim
+    curl
 
-  environment.systemPackages = with pkgs;
-    [
-      neovim
-      curl
+    fnm
+    pnpm
 
-      fnm
-      pnpm
+    rustup
+    cargo
 
-      rustup
-      cargo
-
-      stm32cubemx
-      probe-rs-tools
-
-    ];
+    stm32cubemx
+    probe-rs-tools
+  ];
 }
