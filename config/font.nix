@@ -20,22 +20,11 @@
         ];
         sansSerif =[
           "Noto Sans CJK JP"
-          "Noto Clor Emoji"
+          "Noto Color Emoji"
         ];
         emoji = ["Noto Color Emoji"];
       };
     };
-  };
-
-  # inputMethod
-  i18n.inputMethod = {
-    type = "fcitx5";
-    enable = true;
-    fcitx5.waylandFrontend = true;
-    fcitx5.addons = with pkgs;[
-      fcitx5-mozc
-      fcitx5-gtk
-    ];
   };
 
   services.xserver.exportConfiguration = true;

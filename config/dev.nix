@@ -5,13 +5,8 @@
 
   environment.systemPackages = with pkgs;
     [
-      git
-      lazygit
-      gh
-
-      vim
       neovim
-      vscode
+      curl
 
       fnm
       pnpm
@@ -22,6 +17,5 @@
       stm32cubemx
       probe-rs-tools
 
-      claude-code
     ];
 }
