@@ -13,6 +13,7 @@ in
     pkgs.xeyes
     pkgs.discord
     pkgs.slack
+    (pkgs.callPackage ./pkgs/tern.nix { })
 
     agents.claude-code
     agents.codex
