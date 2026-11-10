@@ -30,7 +30,9 @@ stdenv.mkDerivation rec {
 
   unpackPhase = ''
     runHook preUnpack
-    dpkg-deb -x "$src" .
+    # The Nix build sandbox cannot restore the upstream setuid sandbox helper.
+    dpkg-deb --fsys-tarfile "$src" | tar -x \
+      --no-same-owner --no-same-permissions --mode=u-s,g-s
     runHook postUnpack
   '';
   dontConfigure = true;
