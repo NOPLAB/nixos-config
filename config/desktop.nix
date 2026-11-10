@@ -2,15 +2,20 @@
 
 {
   services.xserver = {
-    enable = true;
-    exportConfiguration = true;
+    enable = false;
     xkb = {
       layout = "us";
       variant = "";
     };
   };
 
-  services.displayManager.sddm.enable = true;
+  services.displayManager = {
+    defaultSession = "plasma";
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+  };
   services.desktopManager.plasma6.enable = true;
   services.printing.enable = true;
 
