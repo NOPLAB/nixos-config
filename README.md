@@ -45,3 +45,11 @@ sudo nixos-rebuild switch --flake /etc/nixos#nixos
 登録後のビルドはDownloadsを参照せず、固定したSHA-256で内容を検証します。
 ストアのGCで削除された場合は再登録してください。
 更新時は `pkgs/tern.nix` の `version`、案内URL、`hash` とこの登録コマンドを更新します。
+
+## ChatGPT / Claude
+
+ChatGPTはnixpkgsの公式アプリパッケージ `chatgpt`、Claudeは
+`pkgs/claude-desktop.nix` で公式Linux版の.debをパッケージ化して導入します。
+アプリ一覧の「ChatGPT」「Claude」、または `chatgpt` / `claude-desktop` で起動します。
+Claudeの更新は `version` と公式配布ファイルの `hash` を更新し、再構築してください。
+Claude Cowork用のQEMU・仮想マシン環境はこの設定には含めていません。

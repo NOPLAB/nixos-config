@@ -13,6 +13,8 @@ in
     pkgs.xeyes
     pkgs.discord
     pkgs.slack
+    pkgs.chatgpt
+    (pkgs.callPackage ./pkgs/claude-desktop.nix { })
     (pkgs.callPackage ./pkgs/tern.nix { })
 
     agents.claude-code
