@@ -14,7 +14,11 @@
     networkmanager.enable = true;
   };
 
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
 
   services.fwupd.enable = true;
 

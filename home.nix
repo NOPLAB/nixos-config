@@ -14,6 +14,7 @@ in
 
     agents.claude-code
     agents.codex
+    agents.omo-ai
   ];
 
   home.stateVersion = "26.05";
