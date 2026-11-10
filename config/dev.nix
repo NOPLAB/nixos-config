@@ -5,6 +5,8 @@
     git
     gh
     neovim
+    tree-sitter
+    gcc
     curl
 
     fnm
