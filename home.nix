@@ -19,6 +19,7 @@ in
     pkgs.xeyes
     pkgs.discord
     pkgs.slack
+    pkgs.winboat
     desktopPkgs.chatgpt
     (agents.claude-desktop.override {
       commandLineArgs = "--ozone-platform-hint=auto --enable-wayland-ime";

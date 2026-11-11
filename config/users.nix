@@ -7,7 +7,7 @@
     isNormalUser = true;
     description = "nop";
     shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = [ pkgs.kdePackages.kate ];
   };
 }

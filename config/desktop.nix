@@ -22,6 +22,8 @@
   services.fprintd.enable = true;
   services.printing.enable = true;
 
+  virtualisation.docker.enable = true;
+
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
