@@ -20,6 +20,11 @@
   };
   services.desktopManager.plasma6.enable = true;
   services.fprintd.enable = true;
+  # SDDM includes the login PAM stack. KWallet needs the login password.
+  security.pam.services.login = {
+    fprintAuth = false;
+    kwallet.enable = true;
+  };
   services.printing.enable = true;
 
   virtualisation.docker.enable = true;
