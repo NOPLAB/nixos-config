@@ -16,11 +16,18 @@ lazy.nvimのプラグインは初回起動時に取得します。更新可能�
 
 ## 構成
 
-- `hosts/nixos/`: このPC固有の設定、ハードウェア設定、stateVersion
+- `hosts/v3/`: V3固有の設定、ハードウェア設定、ディスク構成、stateVersion
 - `modules/nixos/`: システム、ネットワーク、デスクトップ、開発環境などのNixOS設定
 - `home/nop/`: ユーザー情報、アプリ一覧、Fish・tmux・NeovimのHome Manager設定
 - `dotfiles/`: Home Managerで配置する設定ファイル
 - `pkgs/`: 独自パッケージ定義
+
+機種ごとに `hosts/v3/`、`hosts/desktop/` のように分けます。
+現在の `nixosConfigurations.nixos` は `hosts/v3/` を読み込みます。
+Desktopを追加する場合は、その実機で生成した `hardware-configuration.nix` と
+専用の `default.nix` を `hosts/desktop/` に置き、flakeの構成を追加します。
+ディスクUUID・マウント設定は機種ごとに指定し、V3の値を流用しないでください。
+共通設定は `modules/nixos/` を読み込みます。
 
 設定は `flake.nix` から読み込みます。再構築コマンドは従来どおりです。
 
