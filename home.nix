@@ -20,7 +20,9 @@ in
     pkgs.discord
     pkgs.slack
     desktopPkgs.chatgpt
-    (pkgs.callPackage ./pkgs/claude-desktop.nix { })
+    (agents.claude-desktop.override {
+      commandLineArgs = "--ozone-platform-hint=auto --enable-wayland-ime";
+    })
     (pkgs.callPackage ./pkgs/tern.nix { })
 
     agents.claude-code

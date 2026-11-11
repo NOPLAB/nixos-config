@@ -49,9 +49,9 @@ sudo nixos-rebuild switch --flake /etc/nixos#nixos
 ## ChatGPT / Claude
 
 ChatGPTは `llm-agents` が参照する新しいnixpkgsの公式アプリパッケージ `chatgpt`、Claudeは
-`pkgs/claude-desktop.nix` で公式Linux版の.debをパッケージ化して導入します。
+`llm-agents` の `claude-desktop` で公式Linux版を導入します。
 アプリ一覧の「ChatGPT」「Claude」、または `chatgpt` / `claude-desktop` で起動します。
-Claudeの更新は `version` と公式配布ファイルの `hash` を更新し、再構築してください。
+Claudeの更新は `nix flake update llm-agents` を実行し、再構築してください。
 Claude Cowork用のQEMU・仮想マシン環境はこの設定には含めていません。
 システムのnixpkgs 26.05ではChatGPTがmacOS専用のため、ChatGPTのみ
 `flake.lock` で固定された `llm-agents` 側のnixpkgsから導入します。
