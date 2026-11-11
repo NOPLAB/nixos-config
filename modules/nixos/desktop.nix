@@ -3,6 +3,9 @@
 {
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  # Wine applications can require 32-bit graphics drivers.
+  hardware.graphics.enable32Bit = true;
+
   services.xserver = {
     enable = false;
     xkb = {
