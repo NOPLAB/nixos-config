@@ -19,6 +19,7 @@
     };
   };
   services.desktopManager.plasma6.enable = true;
+  services.fprintd.enable = true;
   services.printing.enable = true;
 
   services.pulseaudio.enable = false;
