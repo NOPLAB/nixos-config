@@ -42,11 +42,11 @@ Fishでdirenv・nix-direnvを利用します。プロジェクトの `.envrc` �
 環境はnix-direnvがキャッシュします。
 
 RSJ用のTeX・Ghostscript・Poppler・Pythonはシステム全体ではなく、
-`devshells/rsj.nix` で管理します。手動で使う場合:
+`devshells/tex.nix` で管理します。手動で使う場合:
 
 ```bash
 cd ~/dev/lab/RSJ
-nix develop ~/dev/nixos-config#rsj
+nix develop ~/dev/nixos-config#tex
 make check
 ```
 
@@ -55,7 +55,7 @@ make check
 ```bash
 cd ~/dev/lab/RSJ
 # 既存の .envrc がある場合は上書きせず、次の行を追記してください。
-echo 'use flake "$HOME/dev/nixos-config#rsj"' >> .envrc
+echo 'use flake "$HOME/dev/nixos-config#tex"' >> .envrc
 direnv allow
 ```
 

@@ -15,7 +15,7 @@
     devShells.x86_64-linux.ros2-humble =
       inputs.nix-ros-overlay.devShells.x86_64-linux.example-ros2-desktop-humble;
 
-    devShells.x86_64-linux.rsj = import ./devshells/rsj.nix {
+    devShells.x86_64-linux.tex = import ./devshells/tex.nix {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     };
 
