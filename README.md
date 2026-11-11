@@ -35,6 +35,33 @@ Desktopを追加する場合は、その実機で生成した `hardware-configur
 sudo nixos-rebuild switch --flake /etc/nixos#nixos
 ```
 
+## 開発環境とdirenv
+
+Fishでdirenv・nix-direnvを利用します。プロジェクトの `.envrc` を
+`direnv allow` で承認すると、移動時に開発環境が読み込まれます。
+環境はnix-direnvがキャッシュします。
+
+RSJ用のTeX・Ghostscript・Poppler・Pythonはシステム全体ではなく、
+`devshells/rsj.nix` で管理します。手動で使う場合:
+
+```bash
+cd ~/dev/lab/RSJ
+nix develop ~/dev/nixos-config#rsj
+make check
+```
+
+再構築後、新しいFishセッションで自動読み込みを設定する場合:
+
+```bash
+cd ~/dev/lab/RSJ
+# 既存の .envrc がある場合は上書きせず、次の行を追記してください。
+echo 'use flake "$HOME/dev/nixos-config#rsj"' >> .envrc
+direnv allow
+```
+
+`.direnv/` はプロジェクトのGit除外設定に追加してください。
+Node・Rustなど既存の開発ツールは引き続きシステム全体で利用できます。
+
 ## ROS 2 Humble
 
 `nix-ros-overlay` のHumble desktop開発環境を使用します。
