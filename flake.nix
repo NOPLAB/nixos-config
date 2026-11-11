@@ -9,7 +9,6 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-ros-overlay.url = "github:lopsided98/nix-ros-overlay/master";
-    inventor.url = "github:Harvi654/Autodesk-Inventor-for-Linux/a6fb051e60360c6c2de61815bd1b256f0379a361";
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs: {
@@ -25,8 +24,6 @@
 
       modules = [
         ./hosts/v3
-        inputs.inventor.nixosModules.default
-        ./modules/nixos/inventor.nix
 
         home-manager.nixosModules.home-manager
 

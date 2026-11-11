@@ -78,35 +78,6 @@ colcon --help
 システムの再構築後はROS用のバイナリキャッシュも利用できます。
 キャッシュにないパッケージはソースからビルドされる場合があります。
 
-## Autodesk Inventor
-
-[上流のNixOS手順](https://github.com/Harvi654/Autodesk-Inventor-for-Linux/blob/main/docs/nixos.md)
-に従い、Inventor Professional 2027 English（2027.1更新・Content Center付き）を
-`modules/nixos/inventor.nix` で有効化します。専用Wine、FUSE、デスクトップ項目、
-Autodeskサインインのコールバックは上流モジュールが設定します。
-Inventor側のnixpkgsはシステム側に追従させず、上流の固定値を使用します。
-
-Autodeskから取得した以下の英語版メディアを、再構築前に登録してください。
-日本語版のWebインストーラーでは代用できません。
-
-```bash
-nix-store --add-fixed sha256 ~/Downloads/Inventor_Professional_2027_English_Win_64bit_db_002_002.7z
-nix-store --add-fixed sha256 ~/Downloads/Inventor_2027.1_Update.exe
-cd ~/dev/nixos-config
-nix flake lock
-git add flake.lock
-git commit -m "chore(deps): lock Inventor input"
-sudo nixos-rebuild switch --flake /etc/nixos#nixos
-inventor-2027
-```
-
-今回の追加時はネットワーク制限でlockfileを生成できなかったため、入力URL自体を
-コミットに固定しています。初回に上記の `nix flake lock` を実行してください。
-更新は入力URLのコミットを変更して `nix flake update inventor` を実行します。
-初回はWineのビルドに時間とディスク容量が必要です。利用にはAutodeskのアカウントと
-ライセンスが必要です。AutodeskメディアやInventorを含むビルド結果・システムclosureを
-公開バイナリキャッシュにアップロードしないでください。
-
 ## Tern
 
 `pkgs/tern.nix` で公式Linuxバイナリをパッケージ化し、Home Managerで導入します。
