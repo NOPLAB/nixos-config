@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   networking = {
@@ -12,6 +12,12 @@
   services.softether = {
     enable = true;
     vpnclient.enable = true;
+  };
+
+  # Backport NixOS/nixpkgs#537675: SoftEther writes state beside argv[0].
+  systemd.services.vpnclient.serviceConfig = {
+    ExecStart = lib.mkForce "/var/lib/softether/vpnclient/vpnclient start";
+    ExecStop = lib.mkForce "/var/lib/softether/vpnclient/vpnclient stop";
   };
 
   environment.systemPackages = with pkgs; [
