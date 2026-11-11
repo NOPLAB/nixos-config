@@ -16,6 +16,7 @@ in
     pkgs.xeyes
     pkgs.discord
     pkgs.slack
+    pkgs.spotify
     (pkgs.callPackage ../../pkgs/bottles.nix { })
     desktopPkgs.winboat
     desktopPkgs.chatgpt
