@@ -16,7 +16,7 @@ in
     pkgs.xeyes
     pkgs.discord
     pkgs.slack
-    pkgs.bottles
+    (pkgs.callPackage ../../pkgs/bottles.nix { })
     desktopPkgs.winboat
     desktopPkgs.chatgpt
     (agents.claude-desktop.override {
