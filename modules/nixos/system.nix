@@ -4,7 +4,8 @@
   boot.loader = {
     systemd-boot = {
       enable = true;
-      configurationLimit = 2;
+      # The 96 MiB ESP is shared with Windows; two initrds do not fit.
+      configurationLimit = 1;
     };
     efi.canTouchEfiVariables = true;
   };
