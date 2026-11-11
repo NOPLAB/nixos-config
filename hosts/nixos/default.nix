@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./config
+    ../../modules/nixos
   ];
 
   fileSystems."/mnt/windows" = {

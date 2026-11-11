@@ -14,6 +14,20 @@ lazy.nvimのプラグインは初回起動時に取得します。更新可能�
 既存の設定ファイルはHome Managerへの移行時に `.before-home-manager` 付きで
 バックアップします。同名のバックアップが既にある場合は、先に移動してください。
 
+## 構成
+
+- `hosts/nixos/`: このPC固有の設定、ハードウェア設定、stateVersion
+- `modules/nixos/`: システム、ネットワーク、デスクトップ、開発環境などのNixOS設定
+- `home/nop/`: ユーザー情報、アプリ一覧、Fish・tmux・NeovimのHome Manager設定
+- `dotfiles/`: Home Managerで配置する設定ファイル
+- `pkgs/`: 独自パッケージ定義
+
+設定は `flake.nix` から読み込みます。再構築コマンドは従来どおりです。
+
+```bash
+sudo nixos-rebuild switch --flake /etc/nixos#nixos
+```
+
 ## ROS 2 Humble
 
 `nix-ros-overlay` のHumble desktop開発環境を使用します。
