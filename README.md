@@ -53,5 +53,5 @@ ChatGPTは `llm-agents` が参照する新しいnixpkgsの公式アプリパッ�
 アプリ一覧の「ChatGPT」「Claude」、または `chatgpt` / `claude-desktop` で起動します。
 Claudeの更新は `nix flake update llm-agents` を実行し、再構築してください。
 Claude Cowork用のQEMU・仮想マシン環境はこの設定には含めていません。
-システムのnixpkgs 26.05ではChatGPTがmacOS専用のため、ChatGPTのみ
-`flake.lock` で固定された `llm-agents` 側のnixpkgsから導入します。
+システムのnixpkgs 26.05ではChatGPTがmacOS専用、WinBoatのElectronがサポート終了済みのため、
+この2つは `flake.lock` で固定された `llm-agents` 側のnixpkgsから導入します。
