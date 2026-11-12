@@ -12,6 +12,7 @@ in
 
 {
   home.packages = [
+    pkgs.btop
     pkgs.cowsay
     pkgs.xeyes
     pkgs.discord
