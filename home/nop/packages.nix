@@ -13,6 +13,7 @@ in
 {
   home.packages = [
     pkgs.btop
+    pkgs.dust
     pkgs.cowsay
     pkgs.xeyes
     pkgs.discord
