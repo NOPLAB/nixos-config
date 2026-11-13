@@ -46,7 +46,7 @@ RSJ用のTeX・Ghostscript・Poppler・Pythonはシステム全体ではなく�
 
 ```bash
 cd ~/dev/lab/RSJ
-nix develop ~/dev/nixos-config#tex
+nix develop ~/nixos-config#tex
 make check
 ```
 
@@ -55,7 +55,7 @@ make check
 ```bash
 cd ~/dev/lab/RSJ
 # 既存の .envrc がある場合は上書きせず、次の行を追記してください。
-echo 'use flake "$HOME/dev/nixos-config#tex"' >> .envrc
+echo 'use flake "$HOME/nixos-config#tex"' >> .envrc
 direnv allow
 ```
 
