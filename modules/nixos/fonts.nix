@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  fonts = {
+  fonts = lib.mkIf config.profiles.desktop.enable {
     packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans

@@ -4,8 +4,11 @@
   imports = [
     ./hardware-configuration.nix
     ./audio.nix
+    ./system.nix
     ../../modules/nixos
   ];
+
+  profiles.desktop.enable = true;
 
   fileSystems."/mnt/windows" = {
     device = "/dev/disk/by-uuid/B8525008524FCA38";

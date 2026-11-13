@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ lib, osConfig, pkgs, inputs, ... }:
 
 let
   agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
@@ -15,6 +15,11 @@ in
     pkgs.btop
     pkgs.dust
     pkgs.cowsay
+
+    agents.claude-code
+    agents.codex
+    agents.omo-ai
+  ] ++ lib.optionals osConfig.profiles.desktop.enable [
     pkgs.xeyes
     pkgs.discord
     pkgs.slack
@@ -26,9 +31,5 @@ in
       commandLineArgs = "--ozone-platform-hint=auto --enable-wayland-ime";
     })
     (pkgs.callPackage ../../pkgs/tern.nix { })
-
-    agents.claude-code
-    agents.codex
-    agents.omo-ai
   ];
 }

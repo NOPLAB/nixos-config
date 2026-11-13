@@ -103,3 +103,24 @@ Claudeの更新は `nix flake update llm-agents` を実行し、再構築して�
 Claude Cowork用のQEMU・仮想マシン環境はこの設定には含めていません。
 システムのnixpkgs 26.05ではChatGPTがmacOS専用、WinBoatのElectronがサポート終了済みのため、
 この2つは `flake.lock` で固定された `llm-agents` 側のnixpkgsから導入します。
+
+## ホストごとのデスクトップ切り替え
+
+ホストの `default.nix` で指定します。既定値は `false` で、V3では明示的に
+`true` にしています。
+
+```nix
+profiles.desktop.enable = true; # GUIなしのホストでは false
+```
+
+この設定でPlasma・SDDM、音声・印刷、KWallet、Firefox・1Password、
+Home ManagerのGUIアプリ、日本語入力・フォントをまとめて切り替えます。
+CLIツール、Fish・tmux・Neovimの設定はどちらでも利用できます。
+Home Manager側はNixOSの `osConfig.profiles.desktop.enable` を参照します。
+
+WSL用ホストを追加する場合は、共通の `modules/nixos/` とNixOS-WSLのモジュールを
+読み込み、`profiles.desktop.enable = false;` とします。
+`hosts/v3/` のディスク・音声・ブートローダー設定は読み込まないでください。
+この切り替えだけでWSL環境を作成するものではなく、NixOS-WSLの入力・ホスト構成は
+別途追加が必要です。ネットワークやDockerは共通設定で有効なため、WSLでの利用方法に
+合わせてホスト側で調整してください。

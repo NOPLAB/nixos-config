@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   programs.fish.enable = true;
@@ -8,6 +8,6 @@
     description = "nop";
     shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = [ pkgs.kdePackages.kate ];
+    packages = lib.optionals config.profiles.desktop.enable [ pkgs.kdePackages.kate ];
   };
 }

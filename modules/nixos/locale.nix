@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   time.timeZone = "Asia/Tokyo";
@@ -17,7 +17,7 @@
       LC_TIME = "ja_JP.UTF-8";
     };
 
-    inputMethod = {
+    inputMethod = lib.mkIf config.profiles.desktop.enable {
       enable = true;
       type = "fcitx5";
       fcitx5.waylandFrontend = true;
