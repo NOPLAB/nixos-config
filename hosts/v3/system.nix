@@ -16,5 +16,12 @@
     memoryPercent = 50;
   };
 
+  # Use SSD swap only after the higher-priority zram swap.
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024; # MiB
+    priority = 0;
+  }];
+
   services.fwupd.enable = true;
 }
