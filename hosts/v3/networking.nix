@@ -39,4 +39,12 @@ in
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 67 ];
   };
+
+  # DDSは動的なUDPポートを使うため、実機Piからの受信を送信元で限定する。
+  networking.firewall.extraCommands = ''
+    iptables -I nixos-fw 1 -i ${interface} -s 192.168.1.50/32 -p udp -j nixos-fw-accept
+  '';
+  networking.firewall.extraStopCommands = ''
+    iptables -D nixos-fw -i ${interface} -s 192.168.1.50/32 -p udp -j nixos-fw-accept 2>/dev/null || true
+  '';
 }
