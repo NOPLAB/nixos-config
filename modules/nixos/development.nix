@@ -16,6 +16,8 @@
     lua-language-server
     stylua
 
+    nodejs
+    bun
     fnm
     pnpm
 
