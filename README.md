@@ -124,3 +124,25 @@ WSL用ホストを追加する場合は、共通の `modules/nixos/` とNixOS-WS
 この切り替えだけでWSL環境を作成するものではなく、NixOS-WSLの入力・ホスト構成は
 別途追加が必要です。ネットワークやDockerは共通設定で有効なため、WSLでの利用方法に
 合わせてホスト側で調整してください。
+
+## V3の有線LAN共有
+
+`hosts/v3/networking.nix` で有線LAN `enp198s0f4u1u3` 用のプロファイルを管理します。
+どちらも自動接続しません。既存の接続プロファイルは維持します。
+再構築後、Plasmaの接続一覧または次のコマンドで選択します。
+
+```bash
+# Wi-Fiなど別の接続を上流にして、有線LANへDHCP・DNS・NATを提供
+nmcli connection up "Wired NAT 192.168.1.1"
+
+# 通常の有線LAN接続（DHCPクライアント）に戻す
+nmcli connection up "Wired DHCP"
+```
+
+NAT側はPCが `192.168.1.1/24`、接続機器はDHCPで設定します。
+NetworkManagerは現在のデフォルト接続へ転送するため、Wi-Fiが上流か `ip route` で
+確認してください。上流やVPNが `192.168.1.0/24` と重複する場合は使用せず、
+`address1` を重複しないネットワークに変更してください。
+NAT用ケーブルは配下の機器または専用スイッチに接続します。
+DNS/DHCPの受信用ポートはこの有線インターフェースに限って開放しています。
+USB LANアダプター変更時は同ファイルの `interface` を更新してください。

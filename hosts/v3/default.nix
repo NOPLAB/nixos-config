@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./audio.nix
     ./system.nix
+    ./networking.nix
     ../../modules/nixos
   ];
 
