@@ -25,6 +25,7 @@ in
     pkgs.slack
     pkgs.spotify
     pkgs.obsidian
+    (pkgs.callPackage ../../pkgs/solidcraft.nix { })
     (pkgs.callPackage ../../pkgs/bottles.nix { })
     desktopPkgs.winboat
     desktopPkgs.chatgpt
