@@ -1,6 +1,12 @@
 { ... }:
 
 {
+  # PlasmaはBluetoothが有効な場合に設定画面とトレイを追加する。
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   boot.loader = {
     systemd-boot = {
       enable = true;
