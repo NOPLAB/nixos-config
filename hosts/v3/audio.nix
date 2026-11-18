@@ -14,7 +14,7 @@
   # soft-mixerは既存のハードウェアミュートやゼロ音量を解除しない。
   # 起動時に再生経路を0 dBへ戻し、通常の音量調整はPipeWireに任せる。
   systemd.services.v3-audio-mixer = {
-    description = "Initialize V3 speaker hardware mixer";
+    description = "Initialize V3 speaker and headphone hardware mixer";
     wantedBy = [ "multi-user.target" ];
     wants = [ "sound.target" ];
     after = [ "sound.target" "alsa-restore.service" ];
@@ -23,6 +23,7 @@
     script = ''
       amixer -c Generic_1 sset Master 0dB unmute
       amixer -c Generic_1 sset Speaker 0dB unmute
+      amixer -c Generic_1 sset Headphone 0dB unmute
       amixer -c Generic_1 sset PCM 0dB
       amixer -c Generic_1 sset 'Bass Speaker' unmute
     '';
