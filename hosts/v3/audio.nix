@@ -11,6 +11,23 @@
     ];
   };
 
+  # soft-mixerは既存のハードウェアミュートやゼロ音量を解除しない。
+  # 起動時に再生経路を0 dBへ戻し、通常の音量調整はPipeWireに任せる。
+  systemd.services.v3-audio-mixer = {
+    description = "Initialize V3 speaker hardware mixer";
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "sound.target" ];
+    after = [ "sound.target" "alsa-restore.service" ];
+    serviceConfig.Type = "oneshot";
+    path = [ pkgs.alsa-utils ];
+    script = ''
+      amixer -c Generic_1 sset Master 0dB unmute
+      amixer -c Generic_1 sset Speaker 0dB unmute
+      amixer -c Generic_1 sset PCM 0dB
+      amixer -c Generic_1 sset 'Bass Speaker' unmute
+    '';
+  };
+
   # Backport the pin correction from Linux commit
   # 72107104d4f522405c9dfdfbaeb230e371c295ee without replacing the
   # existing V3 speaker/headphone fixups or rebuilding the kernel.
