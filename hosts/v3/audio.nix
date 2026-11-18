@@ -1,6 +1,16 @@
 { pkgs, ... }:
 
 {
+  # 内蔵ALC245のハードウェア音量が効かない場合も、音声データ側で減衰させる。
+  services.pipewire.wireplumber.extraConfig."51-v3-software-volume" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [{ "device.name" = "alsa_card.pci-0000_c4_00.6"; }];
+        actions.update-props."api.alsa.soft-mixer" = true;
+      }
+    ];
+  };
+
   # Backport the pin correction from Linux commit
   # 72107104d4f522405c9dfdfbaeb230e371c295ee without replacing the
   # existing V3 speaker/headphone fixups or rebuilding the kernel.
