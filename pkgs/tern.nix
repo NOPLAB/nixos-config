@@ -18,16 +18,16 @@
 
 stdenv.mkDerivation rec {
   pname = "tern";
-  version = "0.9.14";
+  version = "0.9.27";
 
   # Downloads require a Stencil login; an unauthenticated fetch returns HTML.
   src = requireFile {
     name = "Tern-${version}-linux-x86_64.tar.gz";
-    hash = "sha256-BCiqLpp82q3qxoYW0GYEXutcNI1ebYD2bHFfGziJNZw=";
+    hash = "sha256-K9M66VvMOuYbiFM1x1GrjaAQEk8ZMiR3Mk7dSBG0GbM=";
     message = ''
       Download Tern ${version} while signed in to Stencil, then run:
         nix-store --add-fixed sha256 ~/Downloads/Tern-${version}-linux-x86_64.tar.gz
-      Source: https://build.stencil.so/d/tern/20261110-001919-6071256/Tern-${version}-linux-x86_64.tar.gz
+      Download page: https://stencil.so/tern
     '';
   };
 

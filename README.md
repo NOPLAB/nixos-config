@@ -86,7 +86,7 @@ colcon --help
 再構築前に一度だけNixストアへ登録してください。
 
 ```bash
-nix-store --add-fixed sha256 ~/Downloads/Tern-0.9.14-linux-x86_64.tar.gz
+nix-store --add-fixed sha256 ~/Downloads/Tern-0.9.27-linux-x86_64.tar.gz
 sudo nixos-rebuild switch --flake /etc/nixos#nixos
 ```
 
