@@ -18,6 +18,7 @@ in
 
     agents.claude-code
     agents.codex
+    agents.antigravity-cli
     agents.omo-ai
   ] ++ lib.optionals osConfig.profiles.desktop.enable [
     pkgs.xeyes
