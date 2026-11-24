@@ -3,6 +3,7 @@
 {
   networking = {
     hostName = "nixos";
+    timeServers = [ "ntp.nict.jp" ];
     networkmanager.enable = true;
     networkmanager.unmanaged = [ "interface-name:vpn_uedac" ];
     dhcpcd.denyInterfaces = [ "vpn_uedac" ];
