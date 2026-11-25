@@ -5,6 +5,7 @@
 
   environment.systemPackages = with pkgs; [
     git
+    git-lfs
     gh
     neovim
     tree-sitter
