@@ -27,7 +27,7 @@
       amixer -c Generic_1 sset PCM 0dB
       amixer -c Generic_1 sset 'Bass Speaker' unmute
       amixer -c Generic_1 sset Capture 0dB cap
-      amixer -c Generic_1 sset 'Internal Mic Boost' 20dB
+      amixer -c Generic_1 sset 'Internal Mic Boost' 30dB
     '';
   };
 
