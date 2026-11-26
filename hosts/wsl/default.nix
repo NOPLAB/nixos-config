@@ -7,6 +7,8 @@
 
   wsl.enable = true;
   wsl.defaultUser = "nop";
+  # Run Windows .exe files (code, explorer.exe, gh.exe) from WSL.
+  wsl.interop.register = true;
 
   profiles.desktop.enable = false;
 
