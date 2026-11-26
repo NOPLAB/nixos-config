@@ -7,24 +7,16 @@
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-ros-overlay.url = "github:lopsided98/nix-ros-overlay/master";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
-    devShells.x86_64-linux.ros2-humble =
-      inputs.nix-ros-overlay.devShells.x86_64-linux.example-ros2-desktop-humble;
-
-    devShells.x86_64-linux.tex = import ./devshells/tex.nix {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    };
-
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-
-      modules = [
-        ./hosts/v3
-
+  outputs = { nixpkgs, home-manager, ... }@inputs:
+    let
+      homeManager = [
         home-manager.nixosModules.home-manager
 
         {
@@ -35,6 +27,26 @@
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
       ];
+    in
+    {
+      devShells.x86_64-linux.ros2-humble =
+        inputs.nix-ros-overlay.devShells.x86_64-linux.example-ros2-desktop-humble;
+
+      devShells.x86_64-linux.tex = import ./devshells/tex.nix {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      };
+
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./hosts/v3 ] ++ homeManager;
+      };
+
+      nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          inputs.nixos-wsl.nixosModules.default
+          ./hosts/wsl
+        ] ++ homeManager;
+      };
     };
-  };
 }

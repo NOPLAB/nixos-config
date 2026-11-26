@@ -17,6 +17,7 @@ lazy.nvimのプラグインは初回起動時に取得します。更新可能�
 ## 構成
 
 - `hosts/v3/`: V3固有の設定、ハードウェア設定、ディスク構成、stateVersion
+- `hosts/wsl/`: NixOS-WSL用の設定（`nixosConfigurations.wsl`）
 - `modules/nixos/`: システム、ネットワーク、デスクトップ、開発環境などのNixOS設定
 - `home/nop/`: ユーザー情報、アプリ一覧、Fish・tmux・NeovimのHome Manager設定
 - `dotfiles/`: Home Managerで配置する設定ファイル
@@ -140,12 +141,21 @@ Home ManagerのGUIアプリ、日本語入力・フォントをまとめて切�
 CLIツール、Fish・tmux・Neovimの設定はどちらでも利用できます。
 Home Manager側はNixOSの `osConfig.profiles.desktop.enable` を参照します。
 
-WSL用ホストを追加する場合は、共通の `modules/nixos/` とNixOS-WSLのモジュールを
-読み込み、`profiles.desktop.enable = false;` とします。
-`hosts/v3/` のディスク・音声・ブートローダー設定は読み込まないでください。
-この切り替えだけでWSL環境を作成するものではなく、NixOS-WSLの入力・ホスト構成は
-別途追加が必要です。ネットワークやDockerは共通設定で有効なため、WSLでの利用方法に
-合わせてホスト側で調整してください。
+## WSL
+
+`hosts/wsl/` はNixOS-WSLのモジュールと共通の `modules/nixos/` を読み込み、
+`profiles.desktop.enable = false;` とします。`hosts/v3/` のディスク・音声・
+ブートローダー設定は読み込みません。WSLがネットワークとresolv.confを管理するため
+NetworkManagerは無効にし、ホスト名は `wsl` にしています。
+
+```bash
+sudo nixos-rebuild switch --flake /etc/nixos#wsl
+```
+
+新規導入時はNixOS-WSLの `nixos.wsl` を `wsl --install --from-file` で取り込み、
+このリポジトリを `~/nixos-config` にcloneして `/etc/nixos` からリンクします。
+既定ユーザーを `nixos` から `nop` に変える初回だけは `switch` ではなく `boot` を使い、
+`wsl -t NixOS` で再起動してから `switch` します。
 
 ## V3の有線LAN共有
 
