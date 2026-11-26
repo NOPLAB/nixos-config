@@ -104,6 +104,28 @@ Claude Cowork用のQEMU・仮想マシン環境はこの設定には含めてい
 システムのnixpkgs 26.05ではChatGPTがmacOS専用、WinBoatのElectronがサポート終了済みのため、
 この2つは `flake.lock` で固定された `llm-agents` 側のnixpkgsから導入します。
 
+## Bottles / Microsoft 365
+
+`pkgs/bottles.nix` でOfficeのインストーラーに対応したBottles 67.6のコミットを固定し、
+`llm-agents` 側のnixpkgsでビルドします。Sodaの認証補助プロセスにもPythonの依存関係を渡します。
+
+Office用のBottleは `Microsoft-365`、ランナーは `soda-11.0-38-experimental` です。
+ランナーとOffice本体はNixストアではなく `~/.local/share/bottles/` 内でBottlesが管理します。
+学校ライセンスでは、契約にデスクトップ版が含まれる場合にMicrosoft 365 Apps for enterpriseを使用します。
+認証はOffice内から学校アカウントで行います。
+
+アプリ一覧の「Microsoft Word」「Microsoft Excel」「Microsoft PowerPoint」などから起動できます。
+Wordの通常起動ではWineのローダーロック待ちが発生することがあります。
+切り分けにはセーフモードを使用します（安定動作を保証するものではありません）。
+
+```bash
+bottles-cli run -b Microsoft-365 -p 'Microsoft Word' -- /safe
+```
+
+Soda実験版とOfficeの対応状況・導入手順は
+[Bottles公式のOffice対応Issue](https://github.com/bottlesdevs/programs/issues/500) を参照してください。
+描画・保存・サインインには未解決の問題があり、実験版の導入だけで動作を保証するものではありません。
+
 ## ホストごとのデスクトップ切り替え
 
 ホストの `default.nix` で指定します。既定値は `false` で、V3では明示的に

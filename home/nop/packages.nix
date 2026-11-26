@@ -3,11 +3,13 @@
 let
   agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
   # Use newer desktop packages pinned by llm-agents in flake.lock:
-  # Linux ChatGPT support and WinBoat with a supported Electron version.
+  # Linux ChatGPT, supported WinBoat Electron, and Office-capable Bottles.
   desktopPkgs = import inputs.llm-agents.inputs.nixpkgs {
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
+  officeBottles = desktopPkgs.callPackage ../../pkgs/bottles.nix { };
+  officeApps = [ "Word" "Excel" "PowerPoint" "Outlook" "OneNote" "Access" "Publisher" ];
 in
 
 {
@@ -27,7 +29,7 @@ in
     pkgs.spotify
     pkgs.obsidian
     (pkgs.callPackage ../../pkgs/solidcraft.nix { })
-    (pkgs.callPackage ../../pkgs/bottles.nix { })
+    officeBottles
     desktopPkgs.winboat
     desktopPkgs.chatgpt
     (agents.claude-desktop.override {
@@ -35,4 +37,17 @@ in
     })
     (pkgs.callPackage ../../pkgs/tern.nix { })
   ];
+
+  xdg.desktopEntries = lib.mkIf osConfig.profiles.desktop.enable (
+    builtins.listToAttrs (map (app: {
+      name = "microsoft-365-${lib.toLower app}";
+      value = {
+        name = "Microsoft ${app}";
+        exec = ''${officeBottles}/bin/bottles-cli run -b Microsoft-365 -p "Microsoft ${app}"'';
+        icon = "applications-office";
+        categories = [ "Office" ];
+        terminal = false;
+      };
+    }) officeApps)
+  );
 }
